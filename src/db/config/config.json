@@ -2,9 +2,9 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "datastore",
+    "database": "database_development",
     "host": "data/datastore.db",
-    "dialect": "sqlite"
+    "dialect": "sqlite3"
   },
   "test": {
     "username": "root",
