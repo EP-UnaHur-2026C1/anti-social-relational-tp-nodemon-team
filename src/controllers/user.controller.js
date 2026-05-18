@@ -25,4 +25,5 @@ const createUser = async(req,res)=>{
 
 }
 
+
 module.exports = {findAll,findbyNickname,findByPk,createUser}
