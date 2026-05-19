@@ -24,6 +24,16 @@ const createUser = async(req,res)=>{
     res.status(201).json(user)
 
 }
+const deleteUser = async (req, res) => {
+    const nickname = req.params.nickname
+    const user = await User.destroy({
+        where: { NickName: nickname }
+    })
+    if(!user){
+        return res.status(404).json({message:"Usuario no encontrado"})
+    }
+    res.status(200).json({message:"Usuario eliminado"})
+}
 
 
-module.exports = {findAll,findbyNickname,findByPk,createUser}
+module.exports = {findAll,findbyNickname,findByPk,createUser,deleteUser}
