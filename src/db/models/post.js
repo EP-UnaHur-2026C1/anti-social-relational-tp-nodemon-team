@@ -16,7 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         through: "Post_Tags",
         as:"tags",
         foreignKey: "postId"
-      } )
+      } ),
+      Post.hasMany(models.PostImages,{
+        foreignKey: "postId",
+        as:"images",
+        onDelete:"CASCADE"
+      })
     }
   }
   Post.init({
