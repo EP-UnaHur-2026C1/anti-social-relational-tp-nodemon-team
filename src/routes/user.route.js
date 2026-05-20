@@ -5,13 +5,15 @@ const {
     findByPk,
     findbyNickname,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 } = require("../controllers/user.controller")
-
+const { validateUser } = require("../middlewares/user.middleware")
 route.get("/",findAll)
 route.get("/id/:id",findByPk)
 route.get("/nick/:nickname", findbyNickname)
 
-route.post("/",createUser)
+route.post("/", validateUser, createUser)
 route.delete("/:nickname", deleteUser)
+route.put("/:nickname", validateUser, updateUser)
 module.exports = route

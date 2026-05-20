@@ -35,5 +35,17 @@ const deleteUser = async (req, res) => {
     res.status(200).json({message:"Usuario eliminado"})
 }
 
+const updateUser = async (req, res) => {
+    const nickname = req.params.nickname
+    const data = req.body
+    const [updated] = await User.update(data, {
+        where: { NickName: nickname }
+    })
+    if (!updated) {
+        return res.status(404).json({ message: "Usuario no encontrado" })
+    }
+    res.status(200).json({ message: "Usuario actualizado" })
+}
 
-module.exports = {findAll,findbyNickname,findByPk,createUser,deleteUser}
+
+module.exports = {findAll,findbyNickname,findByPk,createUser,deleteUser,updateUser}
