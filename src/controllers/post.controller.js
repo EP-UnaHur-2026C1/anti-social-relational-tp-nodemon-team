@@ -81,4 +81,18 @@ const findByPk = async(req,res)=>{
     const post = await Post.findByPk(id)
     res.status(200).json(post)
 }
-module.exports = {createPost,createPostTags,createPostImages,createPostCompleto,findAll,findByPk}
+const updatePost = async(req,res)=>{
+    const id = req.params.id
+    const data = req.body
+    const postUpdate = await Post.update(data,{
+        where: {id:id}
+    })
+    const post = await Post.findByPk(id)
+    res.status(201).json(post)
+}
+const deletePost = async(req,res)=>{
+    const id = req.params.id
+    const postDelete = await Post.destroy({where: {id:id}})
+    res.status(200).json({message: "Post eliminado correctamente"})
+}
+module.exports = {createPost,createPostTags,createPostImages,createPostCompleto,findAll,findByPk,updatePost,deletePost}
