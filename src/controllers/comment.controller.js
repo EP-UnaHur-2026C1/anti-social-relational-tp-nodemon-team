@@ -1,4 +1,4 @@
-const {Comment} = require('../db/models')
+const {Comment,Post,User} = require('../db/models')
 
 const findAll = async (req, res) =>{
     const data = await Comment.findAll()
