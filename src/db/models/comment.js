@@ -15,8 +15,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comment.init({
-    estaVisible: {type: DataTypes.BOOLEAN, allowNull:false},
     contenido: {type: DataTypes.STRING, allowNull:false},
+    date:{type: DataTypes.DATE, allowNull:false, defaultValue:DataTypes.NOW},
+    estaVisible: {type: DataTypes.VIRTUAL, 
+      get() {
+        const limiteDeMeses = process.env.LIMITE_MESES_COMMENT
+        const mesLimite = new Date()
+        mesLimite.setMonth(mesLimite.getMonth() - limiteDeMeses)
+        const commentDate = this.getDataValue("date")
+        return commentDate>=mesLimite
+      }
+    },
   }, {
     sequelize,
     modelName: 'Comment',

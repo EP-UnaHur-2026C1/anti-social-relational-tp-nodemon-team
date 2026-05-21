@@ -85,6 +85,9 @@ const findAll = async(req,res)=>{
         as: "images"
         }
     ]})
+    if(data.comments){
+         data.comments = data.comments.filter(c=>comment.estaVisible === true)
+    }
     res.status(200).json(data)
 }
 const findByPk = async(req,res)=>{
@@ -102,6 +105,11 @@ const findByPk = async(req,res)=>{
         as: "images"
         }
     ]})
+     if(post.comments){
+         post.comments = post.comments.filter(c=>comment.estaVisible === true)
+    }
+   
+    
     res.status(200).json(post)
 }
 const updatePost = async(req,res)=>{
