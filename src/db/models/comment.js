@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comment.init({
-    Estado: {type: DataTypes.BOOLEAN, allowNull:false},
-    Contenido: {type: DataTypes.STRING, allowNull:false},
+    estaVisible: {type: DataTypes.BOOLEAN, allowNull:false},
+    contenido: {type: DataTypes.STRING, allowNull:false},
   }, {
     sequelize,
     modelName: 'Comment',

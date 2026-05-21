@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PostImages.init({
-    URL: DataTypes.STRING
+    url: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'PostImages',
