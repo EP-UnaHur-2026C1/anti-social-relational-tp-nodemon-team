@@ -21,18 +21,15 @@ const editComment = async (req, res) =>{
     const id = req.params.id
     const data = req.body
     const editedComment = await Comment.update(data, {
-        where: {id = id}
+        where: {id: id}
     })
-    if(!editedComment){
-        return res.status(404).json({message: "Comentario no encontrado"})
-    }
     res.status(200).json({message: "Comentario editado"})
 }
 
 const deleteComment = async (req, res) =>{
     const id = req.params.id
     const comment = Comment.destroy({
-        where: {id = id}
+        where: {id: id}
     })
     if(!comment){
         return res.status(404).json({message: "Comentario no encontrado"})
