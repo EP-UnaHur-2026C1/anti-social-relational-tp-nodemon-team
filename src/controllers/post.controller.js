@@ -2,19 +2,10 @@ const {Post,Tag,PostImages,Comment} = require("../db/models")
 
 
 const createPost = async (req, res) => {
-    try {
-        const data = req.body;
-        const post = await Post.create(data);
-        return res.status(201).json(post);
-    } catch (error) {
-        // Esto va a imprimir el error real de SQLite en tu terminal (ej: SQLITE_CONSTRAINT)
-        console.error("🔴 ERROR REAL DE SQLITE:", error); 
-        return res.status(500).json({ 
-            message: "Error al crear el post", 
-            error: error.message 
-        });
+    const data = req.body;
+     const post = await Post.create(data);
+     res.status(201).json(post);
     }
-};
 const createPostTags = async(req,res)=>{
     const data = req.body
     const post = await Post.create({
@@ -75,7 +66,7 @@ const findAll = async(req,res)=>{
     const data = await Post.findAll({include:[
         {
         model: Comment,
-        as: "comments"},
+        as: "Comments"},
         {
         model: Tag,
         as: "tags"
@@ -95,7 +86,7 @@ const findByPk = async(req,res)=>{
     const post = await Post.findByPk(id,{include:[
         {
         model: Comment,
-        as: "comments"},
+        as: "Comments"},
         {
         model: Tag,
         as: "tags"
