@@ -1,6 +1,5 @@
-const {Post} = require("../db/models")
-const {Tag} = require("../db/models")
-const {PostImages} = require("../db/models")
+const {Post,Tag,PostImages,Comment} = require("../db/models")
+
 
 const createPost = async (req, res) => {
     try {
@@ -73,12 +72,36 @@ const createPostCompleto = async(req,res)=>{
     })
 }
 const findAll = async(req,res)=>{
-    const data = await Post.findAll()
+    const data = await Post.findAll({include:[
+        {
+        model: Comment,
+        as: "comments"},
+        {
+        model: Tag,
+        as: "tags"
+        } ,
+        {
+        model:PostImages,
+        as: "images"
+        }
+    ]})
     res.status(200).json(data)
 }
 const findByPk = async(req,res)=>{
     const id = req.params.id
-    const post = await Post.findByPk(id)
+    const post = await Post.findByPk(id,{include:[
+        {
+        model: Comment,
+        as: "comments"},
+        {
+        model: Tag,
+        as: "tags"
+        } ,
+        {
+        model:PostImages,
+        as: "images"
+        }
+    ]})
     res.status(200).json(post)
 }
 const updatePost = async(req,res)=>{
