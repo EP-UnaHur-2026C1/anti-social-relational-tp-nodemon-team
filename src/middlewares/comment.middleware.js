@@ -9,7 +9,7 @@ const validateComment = (req, res, next) =>{
 }
 
 const existComment = async (req, res, next) => {
-    const comment = Comment.findByPk(req.params.id)
+    const comment = await Comment.findByPk(req.params.id)
     if(!comment){
         return res.status(404).json({message: "Comentario no encontrado"})
     }
