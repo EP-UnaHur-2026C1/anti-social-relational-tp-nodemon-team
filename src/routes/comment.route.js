@@ -10,6 +10,6 @@ route.post('/', createComment)
 
 route.put('/:id', validateComment, existComment, editComment)
 
-route.delete('/:id', deleteComment)
+route.delete('/:id',validateComment, existComment, deleteComment)
 
 module.exports = route
