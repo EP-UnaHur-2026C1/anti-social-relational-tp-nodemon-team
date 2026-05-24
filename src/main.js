@@ -8,6 +8,7 @@ const commentRoute = require("./routes/comment.route")
 const tagRoute = require("./routes/tag.route")
 
 const {validateComment, existComment} = require("./middlewares/comment.middleware")
+const {validateTag, existTag} = require("./middlewares/tag.middleware")
 const db = require("./db/models")
 
 
@@ -19,6 +20,8 @@ app.use("/tag", tagRoute)
 
 app.use(validateComment)
 app.use(existComment)
+app.use(validateTag)
+app.use(existTag)
 
 app.listen(PORT, async(err) =>{
     if(err){
