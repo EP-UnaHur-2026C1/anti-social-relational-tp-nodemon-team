@@ -1,0 +1,49 @@
+openapi: 3.0.0
+
+info:
+  title: UnaHur Anti-Social Net API
+  version: 1.0.0
+  description: API backend de la red social anti-social
+
+servers:
+  - url: http://localhost:3001
+
+paths:
+
+  /user:
+    get:
+      summary: Obtener todos los usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+
+    post:
+      summary: Crear usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NickName:
+                  type: string
+                  example: flamita123
+
+      responses:
+        '201':
+          description: Usuario creado
+
+  /post:
+    get:
+      summary: Obtener todos los posts
+      responses:
+        '200':
+          description: Lista de posts
+
+  /comment:
+    get:
+      summary: Obtener comentarios
+      responses:
+        '200':
+          description: Lista de comentarios

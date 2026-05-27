@@ -1,5 +1,5 @@
 const {Post,Tag,PostImages,Comment} = require("../db/models")
-
+const { Op } = require("sequelize")
 
 const createPost = async (req, res) => {
     const data = req.body;
