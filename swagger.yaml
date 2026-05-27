@@ -34,6 +34,69 @@ paths:
         '201':
           description: Usuario creado
 
+  /user/id/{id}:
+    get:
+      summary: Obtener usuario por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario encontrado
+
+  /user/nick/{nickname}:
+    get:
+      summary: Obtener usuario por nickname
+      parameters:
+        - in: path
+          name: nickname
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario encontrado
+
+  /user/{nickname}:
+    put:
+      summary: Actualizar usuario
+      parameters:
+        - in: path
+          name: nickname
+          required: true
+          schema:
+            type: string
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NickName:
+                  type: string
+
+      responses:
+        '200':
+          description: Usuario actualizado
+
+    delete:
+      summary: Eliminar usuario
+      parameters:
+        - in: path
+          name: nickname
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Usuario eliminado
+
   /post:
     get:
       summary: Obtener todos los posts
@@ -41,9 +104,74 @@ paths:
         '200':
           description: Lista de posts
 
+    post:
+      summary: Crear post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NickName:
+                  type: string
+                contenido:
+                  type: string
+
+      responses:
+        '201':
+          description: Post creado
+
+  /post/{id}:
+    get:
+      summary: Obtener post por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: Post encontrado
+
+    put:
+      summary: Actualizar post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: Post actualizado
+
+    delete:
+      summary: Eliminar post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: Post eliminado
+
   /comment:
     get:
       summary: Obtener comentarios
       responses:
         '200':
           description: Lista de comentarios
+
+  /tag:
+    get:
+      summary: Obtener tags
+      responses:
+        '200':
+          description: Lista de tags
