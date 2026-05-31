@@ -8,12 +8,12 @@ const {
     deleteUser,
     updateUser
 } = require("../controllers/user.controller")
-const { validateUser,validarSchemaUser } = require("../middlewares/user.middleware")
+const { validateUser,validarSchemaUser, validateUserById, validarUserByNickname} = require("../middlewares/user.middleware")
 route.get("/",findAll)
-route.get("/id/:id",findByPk)
-route.get("/nick/:nickname", findbyNickname)
+route.get("/id/:id",validateUserById, findByPk)
+route.get("/nick/:nickname",validarUserByNickname, findbyNickname)
 
 route.post("/", validarSchemaUser, createUser)
 route.delete("/:nickname", deleteUser)
-route.put("/:nickname", validateUser, updateUser)
+route.put("/:nickname", validarUserByNickname, updateUser)
 module.exports = route
