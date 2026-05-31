@@ -46,8 +46,8 @@ const createPostCompleto = async(req,res)=>{
         }, {
             include: [{ model: PostImages, as: 'images' }]
         })
-    const promises = data.tags.map((e) => {
-        return Tag.findOrCreate({
+    const promises = data.tags.map(async(e) => {
+        return  await Tag.findOrCreate({
            where: { nombre: { [Op.eq]: e.nombre } },
            defaults: e
                 })
