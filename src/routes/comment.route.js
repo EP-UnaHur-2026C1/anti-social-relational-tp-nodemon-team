@@ -1,15 +1,15 @@
 const {Router} = require('express')
 const route = Router()
 const {findAll,findByPk, createComment, deleteComment, editComment} = require('../controllers/comment.controller')
-const {validateComment, existComment} = require("../middlewares/comment.middleware")
+const {validateComment, validarCommentById} = require("../middlewares/comment.middleware")
 
 route.get('/', findAll)
-route.get('/:id', findByPk)
+route.get('/:id',validarCommentById, findByPk)
 
 route.post('/', createComment)
 
-route.put('/:id', validateComment, existComment, editComment)
+route.put('/:id', validateComment, validarCommentById, editComment)
 
-route.delete('/:id',validateComment, existComment, deleteComment)
+route.delete('/:id',validateComment, validarCommentById, deleteComment)
 
 module.exports = route

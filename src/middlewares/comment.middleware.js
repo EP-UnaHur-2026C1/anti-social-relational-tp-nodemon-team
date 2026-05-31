@@ -1,4 +1,5 @@
 const {Comment} = require("../db/models")
+const validarById = require("./validarById.middleware")
 
 const validateComment = (req, res, next) =>{
     const id = req.params.id
@@ -8,12 +9,6 @@ const validateComment = (req, res, next) =>{
     next()
 }
 
-const existComment = async (req, res, next) => {
-    const comment = await Comment.findByPk(req.params.id)
-    if(!comment){
-        return res.status(404).json({message: "Comentario no encontrado"})
-    }
-    next()
-}
+const validarCommentById = validarById(Comment)
 
-module.exports = {validateComment, existComment}
+module.exports = {validateComment, validarCommentById}
