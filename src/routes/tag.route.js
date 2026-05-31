@@ -1,7 +1,7 @@
 const {Router} = require("express")
 const route = Router()
 const {createTag, findByPk, findAll, editTag, deleteTag} = require ("../controllers/tag.controller")
-const {validateTag, existTag} = require("../middlewares/tag-middleware")
+const {validateTag, existTag} = require("../middlewares/tag.middleware")
 
 route.get("/:id",validateTag, existTag, findByPk)
 route.get("/", findAll)
