@@ -2,7 +2,7 @@ const {Router} = require("express")
 const route = Router()
 const {createPost,createPostTags,createPostImages,createPostCompleto,findAll,findByPk,updatePost,deletePost} = require("../controllers/post.controller")
 const {validarPostById} = require("../middlewares/post.middleware")
-const validarSchemaPost = require("../schemas/post.schema")
+const {validarSchemaPost} = require("../middlewares/post.middleware")
 
 route.post("/",validarSchemaPost, createPost)
 route.post("/createPostWithTags", validarSchemaPost, createPostTags)
