@@ -4,13 +4,7 @@
     "password": null,
     "database": "database_development",
     "host": "data/datastore.db",
-    "dialect": "sqlite",
-    "dialectOptions": {
-      "timeout": 10000
-    },
-    "retry": {
-      "max": 10
-    }
+    "dialect": "sqlite"
   },
   "test": {
     "username": "root",

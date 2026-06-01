@@ -9,6 +9,7 @@ const postRoute = require("./routes/post.route")
 const commentRoute = require("./routes/comment.route")
 const tagRoute = require("./routes/tag.route")
 
+
 const db = require("./db/models")
 const swaggerDocument = YAML.load("./swagger.yaml")
 
@@ -23,7 +24,6 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument)
 )
-
 
 app.listen(PORT, async(err) =>{
     if(err){
