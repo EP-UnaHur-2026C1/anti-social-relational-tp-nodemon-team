@@ -46,14 +46,14 @@ const createPostCompleto = async(req,res)=>{
         }, {
             include: [{ model: PostImages, as: 'images' }]
         })
-    const promises = data.tags.map(async(e) => {
-        return  await Tag.findOrCreate({
+    const tags = []
+    for (const e of data.tags) {
+        const [tag] = await Tag.findOrCreate({
            where: { nombre: { [Op.eq]: e.nombre } },
            defaults: e
-                })
-    })
-    const result = await Promise.all(promises);
-    const tags = result.map(([tag]) => tag);
+        })
+        tags.push(tag)
+    }
     await post.addTags(tags);
     res.status(201).json(post, {
         include: [
