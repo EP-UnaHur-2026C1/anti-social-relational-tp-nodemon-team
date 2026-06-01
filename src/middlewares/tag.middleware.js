@@ -1,6 +1,7 @@
 const {Tag} = require("../db/models")
+const validarById = require("./validarById.middleware")
 
-const validateTag = (req, res, next) =>{
+/*const validateTag = (req, res, next) =>{
     const id  = req.params.id
     if(!id){
         return res.status(400).json({message: "Debe haber un id"})
@@ -15,5 +16,7 @@ const existTag = async (req, res, next) => {
     }
     next()
 }
+*/
+const validarTagById = validarById(Tag)
 
-module.exports = {validateTag, existTag}
+module.exports = {validarTagById}

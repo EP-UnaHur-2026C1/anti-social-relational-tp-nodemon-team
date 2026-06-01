@@ -1,15 +1,15 @@
 const {Router} = require("express")
 const route = Router()
 const {createTag, findByPk, findAll, editTag, deleteTag} = require ("../controllers/tag.controller")
-const {validateTag, existTag} = require("../middlewares/tag.middleware")
+const {validarTagById} = require("../middlewares/tag.middleware")
 
-route.get("/:id",validateTag, existTag, findByPk)
+route.get("/:id",validarTagById, findByPk)
 route.get("/", findAll)
 
 route.post("/:nombre", createTag)
 
-route.put("/:id",validateTag, existTag, editTag)
+route.put("/:id",validarTagById, editTag)
 
-route.delete("/:id",validateTag, existTag, deleteTag)
+route.delete("/:id",validarTagById, deleteTag)
 
 module.exports = route

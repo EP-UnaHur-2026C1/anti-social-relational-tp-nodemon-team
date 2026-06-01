@@ -1,6 +1,8 @@
 const {Comment} = require("../db/models")
 const validarById = require("./validarById.middleware")
 
+
+/*
 const validateComment = (req, res, next) =>{
     const id = req.params.id
     if (!id){
@@ -8,7 +10,8 @@ const validateComment = (req, res, next) =>{
     }
     next()
 }
-
+*/
 const validarCommentById = validarById(Comment)
 
-module.exports = {validateComment, validarCommentById}
+
+module.exports = {validarCommentById}
