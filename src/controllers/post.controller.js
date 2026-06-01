@@ -63,10 +63,21 @@ const createPostCompleto = async(req,res)=>{
     })
 }
 const findAll = async(req,res)=>{
+    const limiteDeMeses = parseInt(process.env.LIMITE_MESES_COMMENT, 10) || 6;
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() - limiteDeMeses)
     const data = await Post.findAll({include:[
         {
         model: Comment,
-        as: "Comments"},
+        as: "Comments",
+        where: {
+            date: {
+              [Op.gte]: fechaLimite
+            }
+          },
+          required: false 
+        
+    },
         {
         model: Tag,
         as: "tags"
@@ -76,17 +87,25 @@ const findAll = async(req,res)=>{
         as: "images"
         }
     ]})
-    if(data.comments){
-         data.comments = data.comments.filter(c=>comment.estaVisible === true)
-    }
     res.status(200).json(data)
 }
 const findByPk = async(req,res)=>{
+    const limiteDeMeses = parseInt(process.env.LIMITE_MESES_COMMENT, 10) || 6;
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() - limiteDeMeses)
+    const fechaLimiteString = fechaLimite.toISOString().replace('T', ' ').replace('Z', '');
     const id = req.params.id
-    const post = await Post.findByPk(id,{include:[
+    try { const post = await Post.findByPk(id,{include:[
         {
         model: Comment,
-        as: "Comments"},
+        as: "Comments",
+        where: {
+            date: {
+              [Op.gte]: fechaLimiteString
+            }
+          },
+          required: false 
+    },
         {
         model: Tag,
         as: "tags"
@@ -96,13 +115,16 @@ const findByPk = async(req,res)=>{
         as: "images"
         }
     ]})
-     if(post.comments){
-         post.comments = post.comments.filter(c=>comment.estaVisible === true)
+    res.status(200).json(post)
+}
+catch(error){
+console.error(error.message)
+res.status(400).json({error: error.message})
+}
     }
    
     
-    res.status(200).json(post)
-}
+
 const updatePost = async(req,res)=>{
     const id = req.params.id
     const data = req.body
